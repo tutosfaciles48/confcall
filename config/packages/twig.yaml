@@ -1,0 +1,8 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+
+    globals:
+        address: '11 Boulevard Georges Charpak, 44600 Saint-Nazaire'
+        org_name: 'Centre Hospitalier de St-Nazaire'
+        version: '1.2.1'
+        version_date: '17/07/2020'
