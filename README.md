@@ -4,6 +4,8 @@ Confcall est une interface web conçue afin de planifier des conférences audio 
 
 Elle utilise le framework symfony afin de permettre une grande modularité, tout en ayant la possibilité de modifier selon ses besoins.
 
+Le logiciel s'assure que le numéro de conférence est unique.
+
 ![page de connexion](https://dl.tutosfaciles48.fr/confcall/login_final.png)
 
 ![page d'accueil](https://dl.tutosfaciles48.fr/confcall/index_final.png)
