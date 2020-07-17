@@ -1,4 +1,4 @@
-#Présentation
+# Présentation
 
 Confcall est une interface web conçue afin de planifier des conférences audio avec Asterisk, avec comme base d'utilisateur un serveur ldap/ad.
 
@@ -10,16 +10,16 @@ Elle utilise le framework symfony afin de permettre une grande modularité, tout
 
 ![page d'administration](https://dl.tutosfaciles48.fr/confcall/admin_final.png)
 
-#Installation et configuration
+# Installation et configuration
 
-##Prérequis techniques
+## Prérequis techniques
 Php : ^7.4 avec le module ldap d'activé dans php.ini
 
 Serveur web : de préférence apache ou nginx
 
 Asterisk version 13.33.0
 
-##Installation
+## Installation
 
 Pour installer, rien de plus simple :
 
@@ -34,7 +34,7 @@ A noter : si vous n'utiliser pas apache comme serveur web, il sera nécessaire d
 Actuellement, la dépendance qui gère la communication avec le serveur asterisk ne gérant pas le versioning, il est obligatoire de récupérer l'archive contenant la dépendace *phpagi* à l'adresse https://dl.tutosfaciles48.fr/confcall/d4rkstar_phpagi.zip.
 Une fois l'archive décompressée dans le dossier vendor/ à la racine, ne pas oublier de modifier le fichier vendor/d4rkstart/phpagi/phpagi-asmanager.php aux lignes 118 à 121 avec: l'adresse du serveur asterisk, l'utilisateur **autorisé** à se connecter, ainsi que sont mot de passe.
 
-##Configuration supplémentaire
+## Configuration supplémentaire
 
 Afin d'adapter l'interface à votre organisation, il faut modifier certains fichiers avec vôtre prope configuration.
 
@@ -43,13 +43,13 @@ Afin d'adapter l'interface à votre organisation, il faut modifier certains fich
 - src/Security/CustomLdapUserProvider : groupe ldap/ad du service informatique (ligne 37)
 - src/Controller/HomeController.php : ip du serveur smtp (ligne 131)
 
-##Suppression des anciennes conférences
+## Suppression des anciennes conférences
 
 La purge s'effectue via l'administration (bouton Purger) ou encore via une tâche cron qui doit exécute le script /cron.php
 
 ex: `* * * * * php /var/www/html/cron.php`
 
-##Notes
+## Notes
 
 Afin de prévenir la suppression des modifications effectuées au niveau des variables globales, il pourra être nécessaire de modifier ces valeurs dans les fichiers suivantes:
 - templates/index.html.twig (ligne 37)
@@ -67,7 +67,7 @@ Afin d'assurer une compatibilité maximale, merci de s'asurer que les champs sui
 
 Si le champs mail n'est pas présent pour l'utilisateur (ou si il est vide), seul l'export au format pdf lui sera proposé.
 
-##Annexe
+## Annexe
 
 Si vous souhaitez vider le cache interne des templates, il suffit de lancer la commande suivante: `php bin/console cache:clear`
 
