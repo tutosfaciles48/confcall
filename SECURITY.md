@@ -13,4 +13,4 @@ The software may be updated from time to time depending on the Symfony update sc
 
 To report a vulnerability, please contact me at contact[@]tutosfaciles48.fr
 
-If the vulnerability is accepted, I will ivestigate through the base code
+If the vulnerability is accepted, it will be investigated
