@@ -78,12 +78,33 @@
 												&nbsp;
 												<a href="{{ path('gen_pdf', {"id": call.id, "pin": call.pin, "start": call.start|url_encode, "end": call.end|url_encode, 'sendMail': true}) }}"><i class="far fa-envelope"></i> Envoyer par mail</a>
 											{% endif %}
+											&nbsp;
+											<a href="#" onclick="setConf({{ call.id }}, '{{ call.start|url_encode }}', '{{ call.end|url_encode }}', {{ call.pin }})"><i class="far fa-envelope"></i> Envoyer à plusieurs destinataires</a>
 										</td>
 									</tr>
 								{% endif %}
 							{% endfor %}
 						</tbody>
 					</table>
+					<div id="form-mail" style="display: none">
+						<button onclick="showHelp()"><i class="fas fa-info-circle"></i></button>
+						<form>
+							<div class="form-group">
+								<label>Adresses: <input type="text" id="adresses" name="addr" size="60" value="" data-intro="Retrouvez ici la liste des personnes à qui envoyer le mail" data-step="4" /></label>
+
+							</div>
+							<div class="form-group">
+								<label>Rechercher une personne : <input type="search" id="srch" width="30" data-intro="Entrez ici le nom ou le prénom de la personne que vous souhaitez rechercher" data-step="1" /></label>
+								<p class="btn btn-primary" onclick="onSearchBtnClick()" data-intro="Cliquez ensuite sur ce bouton pour effectuer une recherche. Seule les personnes avec une adresse mail sont affichées" data-step="2" >Rechercher la personne</p>
+							</div>
+							<div class="form-group">
+								<select id="results" onchange="addPerson(this.options[this.selectedIndex], this.selectedIndex)" data-intro="Sélectionnez ensuite la personne à ajouter ici" data-step="3"></select>
+							</div>
+							<div class="form-group">
+								<p class="btn btn-primary" onclick="sendForm()">Envoyer la fiche récapitulative aux personnes sélectionnées</p>
+							</div>
+						</form>
+					</div>
 					<p><a href="#" onclick="document.location.reload()">Rafraichir la liste</a></p>
 				</div>
 				<h2 class="sub-header">Planifier une nouvelle conférence</h2>
@@ -140,7 +161,9 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<script src="https://kit.fontawesome.com/a88882c5e9.js" crossorigin="anonymous"></script>
+	<script src="{{ asset('assets/js/intro.min.js') }}"></script>
 	<script src="{{ asset('assets/js/create.js') }}"></script>
+	<script src="{{ asset('assets/js/mail.js') }}"></script>
 	<script src="{{ asset('assets/js/date-input-polyfill.dist.js') }}"></script>
 	<script src="{{ asset('assets/js/dashboard.js') }}"></script>
 {% endblock %}

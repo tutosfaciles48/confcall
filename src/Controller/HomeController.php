@@ -117,6 +117,9 @@ class HomeController extends AbstractController {
 		$end = urldecode($request->query->get('end'));
 		$shouldSendMail = $request->query->get('sendMail', false);
 
+		//ex: mr.michu@gmail.com;mme.michu@isp.net,...
+		$addresses = $request->query->get('addr', "");
+
 		$pdf = new Html2Pdf();
 		$pdf->writeHTML($this->renderView("pdf/invitation.html.twig", [
 			"d" => date('d/m/Y', strtotime($start)),
@@ -148,7 +151,30 @@ class HomeController extends AbstractController {
 				->attach($attachment)
 			;
 
-			$mailer->send($message);
+			//On a plusieurs messages à envoyer
+			if($addresses !== false && $addresses !== "") {
+				$message->setFrom($user->getExtraFields()["mail"]);
+				$addresses = explode(";", urldecode($addresses));
+
+				foreach($addresses as $addr) {
+					if($addr !== '') {
+						$message->setTo($addr);
+						$mailer->send($message);
+					}
+				}
+
+				$this->addFlash(
+					'success',
+					'La fiche récapitulative a bien été envoyée aux utilisateurs'
+				);
+			} else {
+				$mailer->send($message);
+
+				$this->addFlash(
+					'success',
+					'Le message a bien été envoyé sur votre mail'
+				);
+			}
 
 			return $this->redirect("/");
 		} else {
